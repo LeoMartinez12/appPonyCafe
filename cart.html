@@ -5,181 +5,151 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>PonyCafe - Carrito POS</title>
-  <script src="https://cdn.tailwindcss.com"></script>
+  <link rel="stylesheet" href="styles.css">
 </head>
 
-<body class="bg-stone-50 text-stone-800 font-sans min-h-screen p-4 sm:p-6 max-w-5xl mx-auto space-y-6">
+<body class="app-container">
 
   <!-- Header -->
-  <header class="flex justify-between items-center pb-4 border-b border-stone-200">
-    <div>
-      <h1 class="text-2xl font-bold text-amber-950 tracking-tight">PonyCafe</h1>
-      <p class="text-xs text-stone-500">POS Campus Universitario</p>
+  <header class="app-header">
+    <div class="header-titles">
+      <h1 class="site-title">PonyCafe</h1>
+      <p class="site-subtitle">POS Campus Universitario</p>
     </div>
-    <a href="catalog.html"
-      class="bg-white hover:bg-stone-100 text-stone-700 px-4 py-1.5 rounded-full text-sm font-semibold border border-stone-200 transition-colors flex items-center gap-2 shadow-sm">
+    <a href="catalog.html" class="btn-back">
       ← Volver al Catálogo
     </a>
   </header>
 
   <!-- Title & Status Section -->
-  <div class="flex justify-between items-end">
+  <div class="page-header">
     <div>
-      <span
-        class="text-xs font-semibold tracking-wide uppercase px-2.5 py-1 bg-amber-100 text-amber-900 rounded-md">Orden
-        #1042</span>
-      <h2 class="text-xl font-bold text-stone-900 mt-1">Carrito de Compras</h2>
+      <span class="badge-order">Orden #1042</span>
+      <h2 class="page-title">Carrito de Compras</h2>
     </div>
-    <span class="text-xs text-stone-500 font-medium">4 artículos en la orden</span>
+    <span class="order-item-count">4 artículos en la orden</span>
   </div>
 
   <!-- Cart Main Content -->
-  <main class="grid grid-cols-1 lg:grid-cols-3 gap-6">
+  <main class="cart-layout">
 
-    <!-- Items List (2 Columns on large screens) -->
-    <section class="lg:col-span-2 space-y-3">
+    <!-- Items List -->
+    <section class="cart-items-section">
 
       <!-- Cart Item 1 -->
-      <article
-        class="bg-white p-4 rounded-2xl border border-stone-200 shadow-sm flex flex-col sm:flex-row justify-between items-start sm:items-center gap-4">
-        <div class="space-y-1 flex-1">
-          <div class="flex items-center gap-2">
-            <span
-              class="text-[10px] font-semibold tracking-wide uppercase px-2 py-0.5 bg-amber-50 text-amber-800 rounded-md">Café</span>
-            <h3 class="font-bold text-base text-stone-900">Capuchino Vainilla</h3>
+      <article class="cart-item">
+        <div class="cart-item-info">
+          <div class="cart-item-header">
+            <span class="badge badge-cafe">Café</span>
+            <h3 class="cart-item-title">Capuchino Vainilla</h3>
           </div>
-          <p class="text-xs text-stone-500">Leche de Almendras (+ $5.00) • Caliente</p>
-          <span class="inline-block font-bold text-stone-900 text-sm">$50.00 c/u</span>
+          <p class="cart-item-desc">Leche de Almendras (+ $5.00) • Caliente</p>
+          <span class="cart-item-unit-price">$50.00 c/u</span>
         </div>
 
-        <div
-          class="flex items-center gap-4 w-full sm:w-auto justify-between sm:justify-end border-t sm:border-t-0 pt-2 sm:pt-0 border-stone-100">
-          <div class="flex items-center border border-stone-200 rounded-xl bg-stone-50 overflow-hidden">
-            <button class="px-3 py-1 text-stone-600 hover:bg-stone-200 font-bold transition-colors">-</button>
-            <span class="px-3 py-1 text-xs font-bold text-stone-800">2</span>
-            <button class="px-3 py-1 text-stone-600 hover:bg-stone-200 font-bold transition-colors">+</button>
+        <div class="cart-item-actions">
+          <div class="quantity-control">
+            <button class="btn-qty">-</button>
+            <span class="qty-display">2</span>
+            <button class="btn-qty">+</button>
           </div>
-          <span class="font-bold text-stone-900 text-base min-w-[70px] text-right">$100.00</span>
-          <button class="text-stone-400 hover:text-red-500 transition-colors p-1" title="Eliminar producto">
-            🗑️
-          </button>
+          <span class="cart-item-total">$100.00</span>
+          <button class="btn-remove" title="Eliminar producto">🗑️</button>
         </div>
       </article>
 
       <!-- Cart Item 2 -->
-      <article
-        class="bg-white p-4 rounded-2xl border border-stone-200 shadow-sm flex flex-col sm:flex-row justify-between items-start sm:items-center gap-4">
-        <div class="space-y-1 flex-1">
-          <div class="flex items-center gap-2">
-            <span
-              class="text-[10px] font-semibold tracking-wide uppercase px-2 py-0.5 bg-amber-50 text-amber-800 rounded-md">Panadería</span>
-            <h3 class="font-bold text-base text-stone-900">Muffin de Mora</h3>
+      <article class="cart-item">
+        <div class="cart-item-info">
+          <div class="cart-item-header">
+            <span class="badge badge-panaderia">Panadería</span>
+            <h3 class="cart-item-title">Muffin de Mora</h3>
           </div>
-          <p class="text-xs text-stone-500">Sin calentar</p>
-          <span class="inline-block font-bold text-stone-900 text-sm">$35.00 c/u</span>
+          <p class="cart-item-desc">Sin calentar</p>
+          <span class="cart-item-unit-price">$35.00 c/u</span>
         </div>
 
-        <div
-          class="flex items-center gap-4 w-full sm:w-auto justify-between sm:justify-end border-t sm:border-t-0 pt-2 sm:pt-0 border-stone-100">
-          <div class="flex items-center border border-stone-200 rounded-xl bg-stone-50 overflow-hidden">
-            <button class="px-3 py-1 text-stone-600 hover:bg-stone-200 font-bold transition-colors">-</button>
-            <span class="px-3 py-1 text-xs font-bold text-stone-800">1</span>
-            <button class="px-3 py-1 text-stone-600 hover:bg-stone-200 font-bold transition-colors">+</button>
+        <div class="cart-item-actions">
+          <div class="quantity-control">
+            <button class="btn-qty">-</button>
+            <span class="qty-display">1</span>
+            <button class="btn-qty">+</button>
           </div>
-          <span class="font-bold text-stone-900 text-base min-w-[70px] text-right">$35.00</span>
-          <button class="text-stone-400 hover:text-red-500 transition-colors p-1" title="Eliminar producto">
-            🗑️
-          </button>
+          <span class="cart-item-total">$35.00</span>
+          <button class="btn-remove" title="Eliminar producto">🗑️</button>
         </div>
       </article>
 
       <!-- Cart Item 3 -->
-      <article
-        class="bg-white p-4 rounded-2xl border border-stone-200 shadow-sm flex flex-col sm:flex-row justify-between items-start sm:items-center gap-4">
-        <div class="space-y-1 flex-1">
-          <div class="flex items-center gap-2">
-            <span
-              class="text-[10px] font-semibold tracking-wide uppercase px-2 py-0.5 bg-amber-50 text-amber-800 rounded-md">Bebidas</span>
-            <h3 class="font-bold text-base text-stone-900">Té Chai Frío</h3>
+      <article class="cart-item">
+        <div class="cart-item-info">
+          <div class="cart-item-header">
+            <span class="badge badge-bebidas">Bebidas</span>
+            <h3 class="cart-item-title">Té Chai Frío</h3>
           </div>
-          <p class="text-xs text-stone-500">Con bastante hielo</p>
-          <span class="inline-block font-bold text-stone-900 text-sm">$50.00 c/u</span>
+          <p class="cart-item-desc">Con bastante hielo</p>
+          <span class="cart-item-unit-price">$50.00 c/u</span>
         </div>
 
-        <div
-          class="flex items-center gap-4 w-full sm:w-auto justify-between sm:justify-end border-t sm:border-t-0 pt-2 sm:pt-0 border-stone-100">
-          <div class="flex items-center border border-stone-200 rounded-xl bg-stone-50 overflow-hidden">
-            <button class="px-3 py-1 text-stone-600 hover:bg-stone-200 font-bold transition-colors">-</button>
-            <span class="px-3 py-1 text-xs font-bold text-stone-800">1</span>
-            <button class="px-3 py-1 text-stone-600 hover:bg-stone-200 font-bold transition-colors">+</button>
+        <div class="cart-item-actions">
+          <div class="quantity-control">
+            <button class="btn-qty">-</button>
+            <span class="qty-display">1</span>
+            <button class="btn-qty">+</button>
           </div>
-          <span class="font-bold text-stone-900 text-base min-w-[70px] text-right">$50.00</span>
-          <button class="text-stone-400 hover:text-red-500 transition-colors p-1" title="Eliminar producto">
-            🗑️
-          </button>
+          <span class="cart-item-total">$50.00</span>
+          <button class="btn-remove" title="Eliminar producto">🗑️</button>
         </div>
       </article>
 
       <!-- Notes / Special Instructions -->
-      <div class="bg-white p-4 rounded-2xl border border-stone-200 shadow-sm space-y-2">
-        <label class="block text-xs font-semibold text-stone-700">Notas para la orden / Cocina</label>
-        <input type="text" placeholder="Ej: Entregar en mesa 4, empaque para llevar..."
-          class="w-full bg-stone-50 border border-stone-200 rounded-xl px-3 py-2 text-xs text-stone-800 focus:outline-none focus:ring-2 focus:ring-amber-800/30">
+      <div class="order-notes">
+        <label class="notes-label">Notas para la orden / Cocina</label>
+        <input type="text" placeholder="Ej: Entregar en mesa 4, empaque para llevar..." class="notes-input">
       </div>
 
     </section>
 
     <!-- Order Summary Panel -->
-    <section class="space-y-4">
-      <div class="bg-white p-5 rounded-2xl border border-stone-200 shadow-sm space-y-4">
-        <h3 class="font-bold text-stone-900 border-b border-stone-100 pb-3 text-base">Resumen de Cuenta</h3>
+    <section class="summary-section">
+      <div class="summary-panel">
+        <h3 class="summary-title">Resumen de Cuenta</h3>
 
-        <div class="space-y-2.5 text-sm">
-          <div class="flex justify-between text-stone-600">
+        <div class="summary-details">
+          <div class="summary-row">
             <span>Subtotal</span>
-            <span class="font-semibold text-stone-800">$185.00</span>
+            <span class="summary-value">$185.00</span>
           </div>
-          <div class="flex justify-between text-stone-600">
+          <div class="summary-row">
             <span>Descuento Estudiantil (10%)</span>
-            <span class="font-semibold text-emerald-700">-$18.50</span>
+            <span class="summary-value discount">-$18.50</span>
           </div>
-          <div class="flex justify-between text-stone-600">
+          <div class="summary-row">
             <span>Impuestos (IVA 16%)</span>
-            <span class="font-semibold text-stone-800">$26.64</span>
+            <span class="summary-value">$26.64</span>
           </div>
-          <div class="border-t border-stone-200 pt-3 flex justify-between items-center">
-            <span class="font-bold text-stone-900 text-base">Total a Pagar</span>
-            <span class="font-extrabold text-xl text-amber-950">$193.14</span>
+          <div class="summary-row total-row">
+            <span class="total-label">Total a Pagar</span>
+            <span class="total-value">$193.14</span>
           </div>
         </div>
 
         <!-- Payment Method Selector -->
-        <div class="pt-2 space-y-2">
-          <label class="block text-xs font-semibold text-stone-700">Método de Pago</label>
-          <div class="grid grid-cols-3 gap-2">
-            <button
-              class="bg-amber-900 text-white p-2.5 rounded-xl text-xs font-semibold text-center border border-amber-900 shadow-sm hover:bg-amber-950 transition-colors">
-              Efectivo
-            </button>
-            <button
-              class="bg-white text-stone-700 hover:bg-stone-50 p-2.5 rounded-xl text-xs font-semibold text-center border border-stone-200 transition-colors">
-              Tarjeta
-            </button>
-            <button
-              class="bg-white text-stone-700 hover:bg-stone-50 p-2.5 rounded-xl text-xs font-semibold text-center border border-stone-200 transition-colors">
-              PonyPay
-            </button>
+        <div class="payment-section">
+          <label class="payment-label">Método de Pago</label>
+          <div class="payment-methods">
+            <button class="btn-payment active">Efectivo</button>
+            <button class="btn-payment">Tarjeta</button>
+            <button class="btn-payment">PonyPay</button>
           </div>
         </div>
 
         <!-- Action Buttons -->
-        <div class="pt-2 space-y-2">
-          <button
-            class="w-full bg-amber-800 hover:bg-amber-900 text-white font-bold py-3 px-4 rounded-xl transition-colors shadow-sm text-sm flex justify-center items-center gap-2">
+        <div class="action-buttons">
+          <button class="btn-checkout">
             <span>Cobrar y Procesar</span> →
           </button>
-          <button
-            class="w-full bg-stone-100 hover:bg-stone-200 text-stone-600 font-semibold py-2 px-4 rounded-xl transition-colors text-xs">
+          <button class="btn-clear">
             Vaciar Carrito
           </button>
         </div>
