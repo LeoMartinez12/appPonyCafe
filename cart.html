@@ -1,117 +1,42 @@
 <!DOCTYPE html>
 <html lang="es">
-
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>PonyCafe - Carrito POS</title>
-  <link rel="icon" type="image/jpeg" href="Recursos/logo.jpeg">
+  <link rel="icon" type="image/jpeg" href="PonyCafe_LOGO.jpg">
   <link rel="stylesheet" href="styles.css">
 </head>
-
 <body class="app-container">
 
-  <!-- Header -->
   <header class="app-header">
-    <div class="header-titles">
-      <h1 class="site-title">PonyCafe</h1>
-      <p class="site-subtitle">POS Campus Universitario</p>
+    <div class="brand-wrapper">
+      <a href="index.html" class="brand-home-link">
+        <img src="PonyCafe_LOGO.jpg" alt="PonyCafe" class="brand-logo">
+      </a>
+      <div class="header-titles">
+        <h1 class="site-title"><a href="index.html" class="title-link">PonyCafe</a></h1>
+        <p class="site-subtitle">POS Campus Universitario</p>
+      </div>
     </div>
-    <a href="catalog.html" class="btn-back">
-      ← Volver al Catálogo
-    </a>
+    <div class="header-actions">
+      <a href="catalog.html" class="btn-back">← Volver al Catálogo</a>
+    </div>
   </header>
 
-  <!-- Title & Status Section -->
   <div class="page-header">
     <div>
-      <span class="badge-order">Orden #1042</span>
+      <span class="badge-order">Punto de Cobro</span>
       <h2 class="page-title">Carrito de Compras</h2>
     </div>
-    <span class="order-item-count">4 artículos en la orden</span>
+    <span class="order-item-count">0 artículos en la orden</span>
   </div>
 
-  <!-- Cart Main Content -->
   <main class="cart-layout">
-
-    <!-- Items List -->
     <section class="cart-items-section">
-
-      <!-- Cart Item 1 -->
-      <article class="cart-item">
-        <div class="cart-item-info">
-          <div class="cart-item-header">
-            <span class="badge badge-cafe">Café</span>
-            <h3 class="cart-item-title">Capuchino Vainilla</h3>
-          </div>
-          <p class="cart-item-desc">Leche de Almendras (+ $5.00) • Caliente</p>
-          <span class="cart-item-unit-price">$50.00 c/u</span>
-        </div>
-
-        <div class="cart-item-actions">
-          <div class="quantity-control">
-            <button class="btn-qty">-</button>
-            <span class="qty-display">2</span>
-            <button class="btn-qty">+</button>
-          </div>
-          <span class="cart-item-total">$100.00</span>
-          <button class="btn-remove" title="Eliminar producto">🗑️</button>
-        </div>
-      </article>
-
-      <!-- Cart Item 2 -->
-      <article class="cart-item">
-        <div class="cart-item-info">
-          <div class="cart-item-header">
-            <span class="badge badge-panaderia">Panadería</span>
-            <h3 class="cart-item-title">Muffin de Mora</h3>
-          </div>
-          <p class="cart-item-desc">Sin calentar</p>
-          <span class="cart-item-unit-price">$35.00 c/u</span>
-        </div>
-
-        <div class="cart-item-actions">
-          <div class="quantity-control">
-            <button class="btn-qty">-</button>
-            <span class="qty-display">1</span>
-            <button class="btn-qty">+</button>
-          </div>
-          <span class="cart-item-total">$35.00</span>
-          <button class="btn-remove" title="Eliminar producto">🗑️</button>
-        </div>
-      </article>
-
-      <!-- Cart Item 3 -->
-      <article class="cart-item">
-        <div class="cart-item-info">
-          <div class="cart-item-header">
-            <span class="badge badge-bebidas">Bebidas</span>
-            <h3 class="cart-item-title">Té Chai Frío</h3>
-          </div>
-          <p class="cart-item-desc">Con bastante hielo</p>
-          <span class="cart-item-unit-price">$50.00 c/u</span>
-        </div>
-
-        <div class="cart-item-actions">
-          <div class="quantity-control">
-            <button class="btn-qty">-</button>
-            <span class="qty-display">1</span>
-            <button class="btn-qty">+</button>
-          </div>
-          <span class="cart-item-total">$50.00</span>
-          <button class="btn-remove" title="Eliminar producto">🗑️</button>
-        </div>
-      </article>
-
-      <!-- Notes / Special Instructions -->
-      <div class="order-notes">
-        <label class="notes-label">Notas para la orden / Cocina</label>
-        <input type="text" placeholder="Ej: Entregar en mesa 4, empaque para llevar..." class="notes-input">
-      </div>
-
+      <div class="loading-state">Cargando carrito...</div>
     </section>
 
-    <!-- Order Summary Panel -->
     <section class="summary-section">
       <div class="summary-panel">
         <h3 class="summary-title">Resumen de Cuenta</h3>
@@ -119,23 +44,28 @@
         <div class="summary-details">
           <div class="summary-row">
             <span>Subtotal</span>
-            <span class="summary-value">$185.00</span>
+            <span class="summary-value" id="summary-subtotal">$0.00</span>
           </div>
-          <div class="summary-row">
-            <span>Descuento Estudiantil (10%)</span>
-            <span class="summary-value discount">-$18.50</span>
+
+          <div class="summary-row discount-row">
+            <label class="discount-toggle-label">
+              <input type="checkbox" id="student-discount-check" checked>
+              <span>Descuento Estudiante (10%)</span>
+            </label>
+            <span class="summary-value discount" id="summary-discount">-$0.00</span>
           </div>
+
           <div class="summary-row">
             <span>Impuestos (IVA 16%)</span>
-            <span class="summary-value">$26.64</span>
+            <span class="summary-value" id="summary-tax">$0.00</span>
           </div>
+
           <div class="summary-row total-row">
             <span class="total-label">Total a Pagar</span>
-            <span class="total-value">$193.14</span>
+            <span class="total-value" id="summary-total">$0.00</span>
           </div>
         </div>
 
-        <!-- Payment Method Selector -->
         <div class="payment-section">
           <label class="payment-label">Método de Pago</label>
           <div class="payment-methods">
@@ -145,7 +75,6 @@
           </div>
         </div>
 
-        <!-- Action Buttons -->
         <div class="action-buttons">
           <button class="btn-checkout">
             <span>Cobrar y Procesar</span> →
@@ -156,9 +85,8 @@
         </div>
       </div>
     </section>
-
   </main>
 
+  <script src="app.js"></script>
 </body>
-
 </html>

@@ -1,92 +1,49 @@
 <!DOCTYPE html>
 <html lang="es">
-
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>PonyCafe - Catálogo POS</title>
-  <link rel="icon" type="image/jpeg" href="Recursos/logo.jpeg">
+  <link rel="icon" type="image/jpeg" href="PonyCafe_LOGO.jpg">
   <link rel="stylesheet" href="styles.css">
 </head>
-
 <body class="app-container">
 
-  <!-- Header -->
   <header class="app-header">
-    <div class="header-titles">
-      <h1 class="site-title">PonyCafe</h1>
-      <p class="site-subtitle">POS Campus Universitario</p>
+    <div class="brand-wrapper">
+      <a href="index.html" class="brand-home-link">
+        <img src="PonyCafe_LOGO.jpg" alt="PonyCafe" class="brand-logo">
+      </a>
+      <div class="header-titles">
+        <h1 class="site-title"><a href="index.html" class="title-link">PonyCafe</a></h1>
+        <p class="site-subtitle">POS Campus Universitario</p>
+      </div>
     </div>
-    <a href="cart.html" class="btn-cart-link">
-      🛒 4 items
-    </a>
+    <div class="header-actions">
+      <a href="index.html" class="btn-back">← Inicio</a>
+      <a href="cart.html" class="btn-cart-link cart-badge-target">🛒 0 items</a>
+    </div>
   </header>
 
-  <!-- Navegación de Categorías -->
+  <section class="toolbar-section">
+    <div class="search-wrapper">
+      <span class="search-icon">🔍</span>
+      <input type="text" id="catalog-search" class="search-input" placeholder="Buscar por nombre o descripción...">
+    </div>
+  </section>
+
   <nav class="category-nav">
-    <button class="btn-category active">Todos</button>
-    <button class="btn-category">Café</button>
-    <button class="btn-category">Panadería</button>
-    <button class="btn-category">Bebidas</button>
+    <button class="btn-category active" data-category="todos">Todos</button>
+    <button class="btn-category" data-category="cafe">Café</button>
+    <button class="btn-category" data-category="panaderia">Panadería</button>
+    <button class="btn-category" data-category="bebidas">Bebidas</button>
+    <button class="btn-category" data-category="snacks">Snacks</button>
   </nav>
 
-  <!-- Grid de Productos -->
   <main class="product-grid">
-
-    <!-- Producto 1 -->
-    <article class="product-card">
-      <div class="product-info">
-        <span class="badge badge-cafe">Café</span>
-        <h2 class="product-title">Americano 12oz</h2>
-        <p class="product-desc">Espresso doble diluido en agua caliente.</p>
-      </div>
-      <div class="product-actions">
-        <span class="product-price">$30.00</span>
-        <button class="btn-add">+ Agregar</button>
-      </div>
-    </article>
-
-    <!-- Producto 2 -->
-    <article class="product-card">
-      <div class="product-info">
-        <span class="badge badge-cafe">Café</span>
-        <h2 class="product-title">Capuchino Vainilla</h2>
-        <p class="product-desc">Espresso, leche vaporizada y vainilla.</p>
-      </div>
-      <div class="product-actions">
-        <span class="product-price">$45.00</span>
-        <button class="btn-add">+ Agregar</button>
-      </div>
-    </article>
-
-    <!-- Producto 3 -->
-    <article class="product-card">
-      <div class="product-info">
-        <span class="badge badge-panaderia">Panadería</span>
-        <h2 class="product-title">Muffin de Mora</h2>
-        <p class="product-desc">Muffin esponjoso relleno de moras silvestres.</p>
-      </div>
-      <div class="product-actions">
-        <span class="product-price">$35.00</span>
-        <button class="btn-add">+ Agregar</button>
-      </div>
-    </article>
-
-    <!-- Producto 4 -->
-    <article class="product-card">
-      <div class="product-info">
-        <span class="badge badge-bebidas">Bebidas</span>
-        <h2 class="product-title">Té Chai Frío</h2>
-        <p class="product-desc">Infusión de especias chai con leche e hielo.</p>
-      </div>
-      <div class="product-actions">
-        <span class="product-price">$50.00</span>
-        <button class="btn-add">+ Agregar</button>
-      </div>
-    </article>
-
+    <div class="loading-state">Cargando menú de PonyCafe...</div>
   </main>
 
+  <script src="app.js"></script>
 </body>
-
 </html>

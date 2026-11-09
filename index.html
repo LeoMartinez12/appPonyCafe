@@ -1,12 +1,99 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="es">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
-    <link rel="icon" type="image/jpeg" href="Recursos/logo.jpeg">
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>PonyCafe - Sistema POS Universitario</title>
+  <link rel="icon" type="image/jpeg" href="PonyCafe_LOGO.jpg">
+  <link rel="stylesheet" href="styles.css">
 </head>
-<body>
-    
+<body class="app-container">
+
+  <header class="app-header">
+    <div class="brand-wrapper">
+      <img src="PonyCafe_LOGO.jpg" alt="PonyCafe" class="brand-logo">
+      <div class="header-titles">
+        <h1 class="site-title">PonyCafe</h1>
+        <p class="site-subtitle">Sistema POS Campus Universitario</p>
+      </div>
+    </div>
+    <div class="header-actions">
+      <span id="stat-db-status" class="status-pill status-fallback">Conectando...</span>
+      <a href="cart.html" class="btn-cart-link cart-badge-target">🛒 0 items</a>
+    </div>
+  </header>
+
+  <section class="hero-banner">
+    <div class="hero-content">
+      <span class="badge badge-cafe">Punto de Venta Activo</span>
+      <h2 class="hero-title">Bienvenido a PonyCafe POS</h2>
+      <p class="hero-desc">Administra pedidos rápidos en el campus, gestiona el carrito de compras universitario y sincroniza en tiempo real con PostgreSQL.</p>
+      <div class="hero-buttons">
+        <a href="catalog.html" class="btn-hero-primary">Abrir Catálogo / Nueva Venta →</a>
+        <a href="cart.html" class="btn-hero-secondary">Revisar Carrito Actual</a>
+      </div>
+    </div>
+  </section>
+
+  <section class="stats-grid">
+    <div class="stat-card">
+      <div class="stat-icon">🧾</div>
+      <div class="stat-info">
+        <span class="stat-label">Órdenes Realizadas</span>
+        <span class="stat-value" id="stat-orders">0</span>
+      </div>
+    </div>
+
+    <div class="stat-card">
+      <div class="stat-icon">💰</div>
+      <div class="stat-info">
+        <span class="stat-label">Total Ventas</span>
+        <span class="stat-value" id="stat-sales">$0.00</span>
+      </div>
+    </div>
+
+    <div class="stat-card">
+      <div class="stat-icon">☕</div>
+      <div class="stat-info">
+        <span class="stat-label">Productos Disponibles</span>
+        <span class="stat-value" id="stat-products">12</span>
+      </div>
+    </div>
+  </section>
+
+  <section class="quick-nav-section">
+    <h3 class="section-title">Accesos Rápidos</h3>
+    <div class="quick-nav-grid">
+      <a href="catalog.html" class="quick-card">
+        <div class="quick-card-icon">📋</div>
+        <h4>Catálogo Completo</h4>
+        <p>Bebidas, café de especialidad, panadería artesanal y snacks.</p>
+      </a>
+
+      <a href="cart.html" class="quick-card">
+        <div class="quick-card-icon">🛒</div>
+        <h4>Caja y Cobro</h4>
+        <p>Procesar orden, aplicar descuento de estudiante y emitir ticket.</p>
+      </a>
+
+      <div class="quick-card info-only">
+        <div class="quick-card-icon">🐘</div>
+        <h4>Base de Datos PostgreSQL</h4>
+        <p>Esquema relacional: categorias, productos, ordenes y detalle_orden.</p>
+      </div>
+    </div>
+  </section>
+
+  <section class="recent-orders-section">
+    <div class="section-header">
+      <h3 class="section-title">Órdenes Recientes en Base de Datos</h3>
+      <button class="btn-refresh" onclick="renderRecentOrders()">Actualizar</button>
+    </div>
+    <div id="recent-orders-container" class="recent-orders-container">
+      <div class="loading-state">Cargando historial de órdenes...</div>
+    </div>
+  </section>
+
+  <script src="app.js"></script>
 </body>
 </html>
