@@ -21,6 +21,7 @@
     </div>
     <div class="header-actions">
       <a href="catalog.html" class="btn-back">← Volver al Catálogo</a>
+      <a href="vendor.html" class="btn-back">👨‍🍳 Vendedor</a>
     </div>
   </header>
 
@@ -42,22 +43,77 @@
         <h3 class="summary-title">Resumen de Cuenta</h3>
 
         <div class="summary-details">
+          <div class="form-group customer-name-group">
+            <label for="client-name-input">Nombre del Alumno / Cliente</label>
+            <input type="text" id="client-name-input" class="form-control" placeholder="Ej. Juan Pérez">
+          </div>
+
+          <div class="delivery-section">
+            <label class="delivery-label">Modalidad de Entrega</label>
+            <div class="delivery-options">
+              <button type="button" class="btn-delivery-option active" data-delivery="INMEDIATA">
+                <span>⚡ Inmediata</span>
+              </button>
+              <button type="button" class="btn-delivery-option" data-delivery="PROGRAMADA">
+                <span>⏰ Programar</span>
+              </button>
+            </div>
+            <div id="scheduled-time-container" class="scheduled-time-container" style="display: none;">
+              <label for="pickup-time-select" class="pickup-time-label">Horario de Recolección en Barra:</label>
+              <select id="pickup-time-select" class="form-control">
+                <option value="07:30">07:30 AM</option>
+                <option value="07:45">07:45 AM</option>
+                <option value="08:00">08:00 AM</option>
+                <option value="08:15">08:15 AM</option>
+                <option value="08:30">08:30 AM</option>
+                <option value="08:45">08:45 AM</option>
+                <option value="09:00">09:00 AM</option>
+                <option value="09:15">09:15 AM</option>
+                <option value="09:30">09:30 AM</option>
+                <option value="09:45">09:45 AM</option>
+                <option value="10:00">10:00 AM</option>
+                <option value="10:30">10:30 AM</option>
+                <option value="11:00">11:00 AM</option>
+                <option value="11:30">11:30 AM</option>
+                <option value="12:00">12:00 PM</option>
+                <option value="12:30">12:30 PM</option>
+                <option value="13:00">01:00 PM</option>
+                <option value="13:30">01:30 PM</option>
+                <option value="14:00">02:00 PM</option>
+                <option value="14:30">02:30 PM</option>
+                <option value="15:00">03:00 PM</option>
+                <option value="15:30">03:30 PM</option>
+                <option value="16:00">04:00 PM</option>
+                <option value="16:30">04:30 PM</option>
+                <option value="17:00">05:00 PM</option>
+                <option value="17:30">05:30 PM</option>
+                <option value="18:00">06:00 PM</option>
+                <option value="18:30">06:30 PM</option>
+                <option value="19:00">07:00 PM</option>
+                <option value="19:30">07:30 PM</option>
+              </select>
+              <span class="delivery-hint">Recoge tu pedido sin hacer fila en barra a la hora indicada.</span>
+            </div>
+          </div>
+
           <div class="summary-row">
             <span>Subtotal</span>
             <span class="summary-value" id="summary-subtotal">$0.00</span>
           </div>
 
-          <div class="summary-row discount-row">
-            <label class="discount-toggle-label">
-              <input type="checkbox" id="student-discount-check" checked>
-              <span>Descuento Estudiante (10%)</span>
-            </label>
-            <span class="summary-value discount" id="summary-discount">-$0.00</span>
-          </div>
-
-          <div class="summary-row">
-            <span>Impuestos (IVA 16%)</span>
-            <span class="summary-value" id="summary-tax">$0.00</span>
+          <div class="beca-section">
+            <div class="summary-row discount-row">
+              <label class="discount-toggle-label">
+                <input type="checkbox" id="beca-discount-check">
+                <span>Beca Alimenticia (1 por día)</span>
+              </label>
+              <span class="summary-value discount" id="summary-discount">-$0.00</span>
+            </div>
+            <div id="beca-matricula-container" class="beca-matricula-container" style="display: none;">
+              <input type="text" id="beca-matricula-input" placeholder="Matrícula del estudiante..." class="beca-input">
+              <button type="button" id="btn-aplicar-beca" class="btn-beca-apply">Validar</button>
+            </div>
+            <p id="beca-status-text" class="beca-status-text"></p>
           </div>
 
           <div class="summary-row total-row">
@@ -72,6 +128,14 @@
             <button class="btn-payment active">Efectivo</button>
             <button class="btn-payment">Tarjeta</button>
             <button class="btn-payment">PonyPay</button>
+          </div>
+          <div id="ponypay-section" class="ponypay-section" style="display: none;">
+            <label class="ponypay-label">Verificación de Cuenta PonyPay</label>
+            <div class="ponypay-input-row">
+              <input type="text" id="ponypay-matricula-input" placeholder="Matrícula para cobro PonyPay..." class="form-control">
+              <button type="button" id="btn-verificar-ponypay" class="btn-vendor-save">Consultar</button>
+            </div>
+            <div id="ponypay-status-box" class="ponypay-status-box" style="display: none;"></div>
           </div>
         </div>
 

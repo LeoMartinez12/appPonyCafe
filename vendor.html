@@ -1,0 +1,161 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>PonyCafe - Panel del Vendedor</title>
+  <link rel="icon" type="image/jpeg" href="PonyCafe_LOGO.jpg">
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body class="app-container vendor-page">
+
+  <header class="app-header">
+    <div class="brand-wrapper">
+      <a href="index.html" class="brand-home-link">
+        <img src="PonyCafe_LOGO.jpg" alt="PonyCafe" class="brand-logo">
+      </a>
+      <div class="header-titles">
+        <h1 class="site-title"><a href="index.html" class="title-link">PonyCafe POS</a></h1>
+        <p class="site-subtitle">Panel de Vendedor & Barista</p>
+      </div>
+    </div>
+    <div class="header-actions">
+      <div class="vendor-clock" id="vendor-clock">00:00:00</div>
+      <a href="catalog.html" class="btn-back">Ver Menú</a>
+      <a href="index.html" class="btn-back">Inicio</a>
+    </div>
+  </header>
+
+  <nav class="vendor-nav-tabs">
+    <button class="vendor-tab-btn active" data-tab="comandas">
+      <span>📦 Comandas en Vivo</span>
+      <span class="tab-counter" id="active-orders-count">0</span>
+    </button>
+    <button class="vendor-tab-btn" data-tab="menu">
+      <span>☕ Catálogo de Productos</span>
+    </button>
+    <button class="vendor-tab-btn" data-tab="caja">
+      <span>💰 Arqueo de Turno</span>
+    </button>
+  </nav>
+
+  <main class="vendor-main">
+
+    <section id="tab-comandas" class="vendor-tab-content active">
+      <div class="vendor-toolbar">
+        <div class="order-filter-group">
+          <button class="btn-filter-status active" data-status="todas">Todas</button>
+          <button class="btn-filter-status" data-status="pendiente">Pendientes</button>
+          <button class="btn-filter-status" data-status="preparacion">En Preparación</button>
+          <button class="btn-filter-status" data-status="lista">Listas</button>
+          <button class="btn-filter-status" data-status="completada">Completadas</button>
+        </div>
+        <button class="btn-refresh-vendor" id="btn-manual-refresh">
+          ↻ Actualizar
+        </button>
+      </div>
+
+      <div id="vendor-orders-grid" class="vendor-orders-grid">
+        <div class="loading-state">Cargando comandas en vivo...</div>
+      </div>
+    </section>
+
+    <section id="tab-menu" class="vendor-tab-content">
+      <div class="menu-control-header">
+        <div>
+          <h3 class="section-title">Catálogo de Productos y Disponibilidad</h3>
+          <p class="vendor-hint">Gestiona el menú de la cafetería, actualiza precios y disponibilidad al instante.</p>
+        </div>
+        <div class="menu-header-actions">
+          <button id="btn-open-new-product" class="btn-vendor-primary">+ Nuevo Producto</button>
+          <input type="text" id="menu-search-input" placeholder="Buscar producto..." class="search-input vendor-search">
+        </div>
+      </div>
+
+      <nav class="category-nav vendor-category-nav">
+        <button class="btn-category active" data-category="todos">Todos</button>
+        <button class="btn-category" data-category="cafe">Café</button>
+        <button class="btn-category" data-category="panaderia">Panadería</button>
+        <button class="btn-category" data-category="bebidas">Bebidas</button>
+        <button class="btn-category" data-category="snacks">Snacks</button>
+      </nav>
+
+      <div id="vendor-menu-grid" class="vendor-menu-grid">
+        <div class="loading-state">Cargando catálogo...</div>
+      </div>
+    </section>
+
+    <section id="tab-caja" class="vendor-tab-content">
+      <div class="caja-summary-grid">
+        <div class="caja-stat-card">
+          <span class="caja-stat-label">Venta Total del Turno</span>
+          <span class="caja-stat-value" id="caja-total-ventas">$0.00</span>
+        </div>
+        <div class="caja-stat-card">
+          <span class="caja-stat-label">Órdenes Procesadas</span>
+          <span class="caja-stat-value" id="caja-total-ordenes">0</span>
+        </div>
+        <div class="caja-stat-card">
+          <span class="caja-stat-label">Becas Alimenticias</span>
+          <span class="caja-stat-value" id="caja-total-becas">0</span>
+        </div>
+      </div>
+
+      <div class="caja-breakdown-card">
+        <h4 class="caja-subhead">Desglose por Método de Pago</h4>
+        <div class="caja-methods-list" id="caja-methods-list">
+          <div class="loading-state">Calculando totales...</div>
+        </div>
+      </div>
+    </section>
+
+  </main>
+
+  <div id="product-modal" class="modal-overlay">
+    <div class="modal-content modal-product-box">
+      <div class="modal-header">
+        <h3 id="modal-product-title" class="modal-title">Agregar Producto al Catálogo</h3>
+        <button class="btn-close-modal" id="btn-close-product-modal">&times;</button>
+      </div>
+      <form id="product-form" class="product-form">
+        <input type="hidden" id="prod-id" value="">
+        <div class="form-group">
+          <label for="prod-name">Nombre del Producto</label>
+          <input type="text" id="prod-name" class="form-control" required placeholder="Ej. Caramel Macchiato">
+        </div>
+        <div class="form-row">
+          <div class="form-group">
+            <label for="prod-category">Categoría</label>
+            <select id="prod-category" class="form-control" required>
+              <option value="1">Café</option>
+              <option value="2">Panadería</option>
+              <option value="3">Bebidas</option>
+              <option value="4">Snacks</option>
+            </select>
+          </div>
+          <div class="form-group">
+            <label for="prod-price">Precio ($ MXN)</label>
+            <input type="number" id="prod-price" class="form-control" step="0.50" min="0" required placeholder="0.00">
+          </div>
+        </div>
+        <div class="form-group">
+          <label for="prod-desc">Descripción / Ingredientes</label>
+          <textarea id="prod-desc" class="form-control" rows="3" placeholder="Detalles de preparación o ingredientes..."></textarea>
+        </div>
+        <div class="form-group-checkbox">
+          <label class="checkbox-label">
+            <input type="checkbox" id="prod-disponible" checked>
+            <span>Disponible de inmediato para venta en el punto de cobro</span>
+          </label>
+        </div>
+        <div class="modal-actions">
+          <button type="button" class="btn-vendor-cancel" id="btn-cancel-product">Cancelar</button>
+          <button type="submit" class="btn-vendor-save" id="btn-save-product">Guardar Producto</button>
+        </div>
+      </form>
+    </div>
+  </div>
+
+  <script src="vendor.js"></script>
+</body>
+</html>

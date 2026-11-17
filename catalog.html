@@ -21,6 +21,8 @@
     </div>
     <div class="header-actions">
       <a href="index.html" class="btn-back">← Inicio</a>
+      <button type="button" class="btn-track-header" onclick="openTrackModal()">🔍 Rastrear</button>
+      <a href="vendor.html" class="btn-back">👨‍🍳 Vendedor</a>
       <a href="cart.html" class="btn-cart-link cart-badge-target">🛒 0 items</a>
     </div>
   </header>
@@ -43,6 +45,72 @@
   <main class="product-grid">
     <div class="loading-state">Cargando menú de PonyCafe...</div>
   </main>
+
+  <div id="customize-modal" class="modal-backdrop">
+    <div class="modal-box modal-customize-box">
+      <div class="modal-header">
+        <div>
+          <h3 id="customize-modal-title" class="modal-title">Personalizar Producto</h3>
+          <span id="customize-modal-category" class="badge badge-cafe">Café</span>
+        </div>
+        <button type="button" class="btn-close-modal" onclick="closeCustomizeModal()">&times;</button>
+      </div>
+      <div class="modal-body">
+        <p id="customize-modal-desc" class="customize-desc"></p>
+
+        <div id="custom-milk-section" class="custom-group">
+          <label class="custom-group-title">🥛 Tipo de Leche</label>
+          <div class="custom-chip-grid">
+            <button type="button" class="btn-custom-chip active" data-group="milk" data-val="Leche Entera" data-cost="0">Entera</button>
+            <button type="button" class="btn-custom-chip" data-group="milk" data-val="Leche Deslactosada" data-cost="0">Deslactosada</button>
+            <button type="button" class="btn-custom-chip" data-group="milk" data-val="Leche de Almendra" data-cost="5">Almendra (+$5)</button>
+            <button type="button" class="btn-custom-chip" data-group="milk" data-val="Leche de Avena" data-cost="5">Avena (+$5)</button>
+            <button type="button" class="btn-custom-chip" data-group="milk" data-val="Sin Leche" data-cost="0">Sin Leche</button>
+          </div>
+        </div>
+
+        <div id="custom-temp-section" class="custom-group">
+          <label class="custom-group-title">🌡️ Temperatura</label>
+          <div class="custom-chip-grid">
+            <button type="button" class="btn-custom-chip active" data-group="temp" data-val="Caliente" data-cost="0">🔥 Caliente</button>
+            <button type="button" class="btn-custom-chip" data-group="temp" data-val="Frío con Hielo" data-cost="0">🧊 Con Hielo</button>
+            <button type="button" class="btn-custom-chip" data-group="temp" data-val="Frappé" data-cost="5">🥤 Frappé (+$5)</button>
+          </div>
+        </div>
+
+        <div id="custom-sweet-section" class="custom-group">
+          <label class="custom-group-title">🍯 Endulzante / Extras</label>
+          <div class="custom-chip-grid">
+            <button type="button" class="btn-custom-chip active" data-group="sweet" data-val="Endulzante Regular" data-cost="0">Regular</button>
+            <button type="button" class="btn-custom-chip" data-group="sweet" data-val="Sin Azúcar" data-cost="0">Sin Azúcar</button>
+            <button type="button" class="btn-custom-chip" data-group="sweet" data-val="Stevia" data-cost="0">Stevia</button>
+            <button type="button" class="btn-custom-chip" data-group="sweet" data-val="Jarabe Extra" data-cost="6">Jarabe Extra (+$6)</button>
+          </div>
+        </div>
+
+        <div class="custom-group">
+          <label for="custom-special-notes" class="custom-group-title">📝 Notas Especiales para Barra</label>
+          <input type="text" id="custom-special-notes" class="form-control" placeholder="Ej. Poco dulce, en vaso térmico, doble shot...">
+        </div>
+
+        <div class="custom-quantity-row">
+          <span class="custom-qty-label">Cantidad a solicitar:</span>
+          <div class="quantity-control">
+            <button type="button" class="btn-qty" id="btn-custom-qty-minus">-</button>
+            <span id="custom-qty-val" class="qty-display">1</span>
+            <button type="button" class="btn-qty" id="btn-custom-qty-plus">+</button>
+          </div>
+        </div>
+      </div>
+      <div class="modal-footer custom-modal-footer">
+        <div class="custom-price-display">
+          <span>Total:</span>
+          <strong id="custom-modal-total-price">$0.00</strong>
+        </div>
+        <button type="button" id="btn-confirm-add-custom" class="btn-primary-action">Añadir a la Orden</button>
+      </div>
+    </div>
+  </div>
 
   <script src="app.js"></script>
 </body>

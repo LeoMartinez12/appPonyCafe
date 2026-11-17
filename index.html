@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="es">
+
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -7,6 +8,7 @@
   <link rel="icon" type="image/jpeg" href="PonyCafe_LOGO.jpg">
   <link rel="stylesheet" href="styles.css">
 </head>
+
 <body class="app-container">
 
   <header class="app-header">
@@ -14,11 +16,12 @@
       <img src="PonyCafe_LOGO.jpg" alt="PonyCafe" class="brand-logo">
       <div class="header-titles">
         <h1 class="site-title">PonyCafe</h1>
-        <p class="site-subtitle">Sistema POS Campus Universitario</p>
+        <p class="site-subtitle">Sistema PONY CAFE</p>
       </div>
     </div>
     <div class="header-actions">
       <span id="stat-db-status" class="status-pill status-fallback">Conectando...</span>
+      <button type="button" class="btn-track-header" onclick="openTrackModal()">🔍 Rastrear Pedido</button>
       <a href="cart.html" class="btn-cart-link cart-badge-target">🛒 0 items</a>
     </div>
   </header>
@@ -27,7 +30,7 @@
     <div class="hero-content">
       <span class="badge badge-cafe">Punto de Venta Activo</span>
       <h2 class="hero-title">Bienvenido a PonyCafe POS</h2>
-      <p class="hero-desc">Administra pedidos rápidos en el campus, gestiona el carrito de compras universitario y sincroniza en tiempo real con PostgreSQL.</p>
+      <p class="hero-desc">Web Oficial de las Cafeterias del Instituto Tecnologico de Morelia</p>
       <div class="hero-buttons">
         <a href="catalog.html" class="btn-hero-primary">Abrir Catálogo / Nueva Venta →</a>
         <a href="cart.html" class="btn-hero-secondary">Revisar Carrito Actual</a>
@@ -73,27 +76,27 @@
       <a href="cart.html" class="quick-card">
         <div class="quick-card-icon">🛒</div>
         <h4>Caja y Cobro</h4>
-        <p>Procesar orden, aplicar descuento de estudiante y emitir ticket.</p>
+        <p>Procesar orden, aplicar beca alimenticia diaria y emitir ticket.</p>
       </a>
 
-      <div class="quick-card info-only">
-        <div class="quick-card-icon">🐘</div>
-        <h4>Base de Datos PostgreSQL</h4>
-        <p>Esquema relacional: categorias, productos, ordenes y detalle_orden.</p>
+      <a href="vendor.html" class="quick-card">
+        <div class="quick-card-icon">👨‍🍳</div>
+        <h4>Panel del Vendedor</h4>
+        <p>Comandas en vivo, preparación de pedidos y control de menú.</p>
+      </a>
+
+      <div class="quick-card" onclick="openTrackModal()" style="cursor: pointer;">
+        <div class="quick-card-icon">📍</div>
+        <h4>Rastrear Mi Pedido</h4>
+        <p>Consulta en vivo el avance de preparación de tu orden por folio.</p>
       </div>
+
     </div>
   </section>
 
-  <section class="recent-orders-section">
-    <div class="section-header">
-      <h3 class="section-title">Órdenes Recientes en Base de Datos</h3>
-      <button class="btn-refresh" onclick="renderRecentOrders()">Actualizar</button>
-    </div>
-    <div id="recent-orders-container" class="recent-orders-container">
-      <div class="loading-state">Cargando historial de órdenes...</div>
-    </div>
-  </section>
+
 
   <script src="app.js"></script>
 </body>
+
 </html>

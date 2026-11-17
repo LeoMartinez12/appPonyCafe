@@ -49,6 +49,17 @@ async function run() {
     await appClient.connect();
     const schemaSql = fs.readFileSync(path.join(__dirname, 'schema.sql'), 'utf-8');
     await appClient.query(schemaSql);
+
+    await appClient.query(`
+      ALTER TABLE ordenes ADD COLUMN IF NOT EXISTS folio VARCHAR(20) UNIQUE;
+      ALTER TABLE ordenes ADD COLUMN IF NOT EXISTS cliente_nombre VARCHAR(120);
+      ALTER TABLE ordenes ADD COLUMN IF NOT EXISTS cliente_matricula VARCHAR(50);
+      ALTER TABLE ordenes ADD COLUMN IF NOT EXISTS tipo_entrega VARCHAR(20) DEFAULT 'INMEDIATA';
+      ALTER TABLE ordenes ADD COLUMN IF NOT EXISTS hora_entrega TIME DEFAULT NULL;
+      ALTER TABLE ordenes ADD COLUMN IF NOT EXISTS fecha_entrega DATE DEFAULT CURRENT_DATE;
+      ALTER TABLE detalle_orden ADD COLUMN IF NOT EXISTS modificadores JSONB DEFAULT '[]'::jsonb;
+    `);
+
     console.log('Tablas y datos iniciales de PonyCafe configurados correctamente.');
   } catch (err) {
     console.error('Error al aplicar el esquema:', err.message);
@@ -58,4 +69,3 @@ async function run() {
 }
 
 run();
-

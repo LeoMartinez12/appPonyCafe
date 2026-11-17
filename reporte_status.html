@@ -1,0 +1,621 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <title>Informe de Estatus - PonyCafe POS</title>
+  <style>
+    @page {
+      size: A4 portrait;
+      margin: 12mm 15mm;
+    }
+
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    body {
+      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+      color: #292524;
+      background-color: #ffffff;
+      line-height: 1.45;
+      font-size: 12.5px;
+    }
+
+    .page {
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+      min-height: 270mm;
+      max-height: 270mm;
+      page-break-after: always;
+      break-after: page;
+    }
+
+    .page-last {
+      page-break-after: avoid;
+      break-after: avoid;
+    }
+
+    .page-content {
+      display: flex;
+      flex-direction: column;
+      gap: 16px;
+    }
+
+    .header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding-bottom: 14px;
+      border-bottom: 2px solid #fde68a;
+    }
+
+    .header-brand {
+      display: flex;
+      align-items: center;
+      gap: 14px;
+    }
+
+    .logo-img {
+      width: 56px;
+      height: 56px;
+      border-radius: 12px;
+      object-fit: cover;
+      border: 1px solid #fde68a;
+    }
+
+    .brand-text h1 {
+      font-size: 23px;
+      font-weight: 800;
+      color: #451a03;
+      letter-spacing: -0.5px;
+      line-height: 1.1;
+    }
+
+    .brand-text p {
+      font-size: 11.5px;
+      color: #78716c;
+      font-weight: 600;
+    }
+
+    .header-meta {
+      text-align: right;
+    }
+
+    .phase-badge {
+      display: inline-block;
+      background-color: #fef3c7;
+      color: #92400e;
+      border: 1px solid #fde68a;
+      font-size: 11px;
+      font-weight: 800;
+      padding: 4px 10px;
+      border-radius: 20px;
+      text-transform: uppercase;
+      letter-spacing: 0.5px;
+      margin-bottom: 3px;
+    }
+
+    .meta-date {
+      font-size: 11px;
+      color: #a8a29e;
+      font-weight: 500;
+    }
+
+    .page2-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding-bottom: 10px;
+      border-bottom: 1px solid #e7e5e4;
+      font-size: 11px;
+      color: #78716c;
+      font-weight: 600;
+    }
+
+    .page2-header span:first-child {
+      color: #92400e;
+      font-weight: 700;
+    }
+
+    .section-title {
+      font-size: 15px;
+      font-weight: 800;
+      color: #78350f;
+      display: flex;
+      align-items: center;
+      gap: 6px;
+      margin-bottom: 8px;
+      padding-bottom: 4px;
+      border-bottom: 1px solid #f5f5f4;
+    }
+
+    .phase-box {
+      background: linear-gradient(135deg, #fffbeb 0%, #fef3c7 100%);
+      border: 1px solid #fde68a;
+      border-radius: 10px;
+      padding: 12px 14px;
+    }
+
+    .phase-box h3 {
+      font-size: 14.5px;
+      font-weight: 800;
+      color: #451a03;
+      margin-bottom: 3px;
+    }
+
+    .phase-box p {
+      font-size: 11.5px;
+      color: #57534e;
+      line-height: 1.4;
+    }
+
+    .phase-steps {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 10px;
+      margin-top: 8px;
+    }
+
+    .step-card {
+      background-color: #fafaf9;
+      border: 1px solid #e7e5e4;
+      border-radius: 8px;
+      padding: 9px 11px;
+    }
+
+    .step-card.active {
+      background-color: #ffffff;
+      border-color: #f59e0b;
+      box-shadow: 0 2px 4px rgba(245, 158, 11, 0.12);
+    }
+
+    .step-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 3px;
+    }
+
+    .step-number {
+      font-size: 9.5px;
+      font-weight: 700;
+      color: #a8a29e;
+      text-transform: uppercase;
+    }
+
+    .step-status {
+      font-size: 9px;
+      font-weight: 800;
+      padding: 2px 6px;
+      border-radius: 8px;
+    }
+
+    .status-done {
+      background-color: #ecfdf5;
+      color: #047857;
+    }
+
+    .status-current {
+      background-color: #fffbeb;
+      color: #b45309;
+      border: 1px solid #fde68a;
+    }
+
+    .status-pending {
+      background-color: #f5f5f4;
+      color: #78716c;
+    }
+
+    .step-title {
+      font-size: 11.5px;
+      font-weight: 700;
+      color: #1c1917;
+      margin-bottom: 2px;
+    }
+
+    .step-desc {
+      font-size: 10.5px;
+      color: #78716c;
+      line-height: 1.3;
+    }
+
+    .features-grid {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 10px;
+    }
+
+    .feature-card {
+      background-color: #ffffff;
+      border: 1px solid #e7e5e4;
+      border-radius: 9px;
+      padding: 10px 12px;
+      display: flex;
+      gap: 10px;
+      align-items: flex-start;
+    }
+
+    .feature-icon {
+      font-size: 20px;
+      background-color: #fffbeb;
+      color: #92400e;
+      width: 38px;
+      height: 38px;
+      min-width: 38px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      border-radius: 8px;
+      border: 1px solid #fde68a;
+    }
+
+    .feature-text h4 {
+      font-size: 12.5px;
+      font-weight: 700;
+      color: #292524;
+      margin-bottom: 2px;
+    }
+
+    .feature-text p {
+      font-size: 10.5px;
+      color: #57534e;
+      line-height: 1.35;
+    }
+
+    .usecases-container {
+      background-color: #fafaf9;
+      border: 1px solid #e7e5e4;
+      border-radius: 9px;
+      padding: 12px 14px;
+    }
+
+    .usecases-list {
+      list-style: none;
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 10px 14px;
+    }
+
+    .usecase-item {
+      display: flex;
+      align-items: flex-start;
+      gap: 8px;
+      font-size: 11px;
+      color: #44403c;
+      line-height: 1.35;
+    }
+
+    .check-bullet {
+      color: #047857;
+      font-weight: 800;
+      font-size: 13px;
+      line-height: 1;
+      margin-top: 1px;
+    }
+
+    .changes-table {
+      width: 100%;
+      border-collapse: collapse;
+      font-size: 11px;
+      background-color: #ffffff;
+      border-radius: 8px;
+      overflow: hidden;
+      border: 1px solid #e7e5e4;
+    }
+
+    .changes-table th {
+      background-color: #f5f5f4;
+      color: #57534e;
+      text-align: left;
+      padding: 7px 10px;
+      font-size: 10.5px;
+      text-transform: uppercase;
+      font-weight: 700;
+      border-bottom: 1px solid #e7e5e4;
+    }
+
+    .changes-table td {
+      padding: 7px 10px;
+      border-bottom: 1px solid #f5f5f4;
+      vertical-align: top;
+      line-height: 1.35;
+    }
+
+    .changes-table tr:last-child td {
+      border-bottom: none;
+    }
+
+    .tag-before {
+      display: inline-block;
+      background-color: #fee2e2;
+      color: #991b1b;
+      padding: 1px 5px;
+      border-radius: 4px;
+      font-size: 9.5px;
+      font-weight: 700;
+    }
+
+    .tag-after {
+      display: inline-block;
+      background-color: #ecfdf5;
+      color: #065f46;
+      padding: 1px 5px;
+      border-radius: 4px;
+      font-size: 9.5px;
+      font-weight: 700;
+    }
+
+    .summary-card {
+      background-color: #451a03;
+      color: #ffffff;
+      border-radius: 9px;
+      padding: 11px 14px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      gap: 12px;
+    }
+
+    .summary-text h4 {
+      font-size: 12.5px;
+      font-weight: 700;
+      color: #fde68a;
+      margin-bottom: 2px;
+    }
+
+    .summary-text p {
+      font-size: 10.5px;
+      color: #f5f5f4;
+      line-height: 1.35;
+    }
+
+    .summary-badge {
+      background-color: #92400e;
+      color: #fffbeb;
+      padding: 5px 10px;
+      border-radius: 6px;
+      font-size: 10.5px;
+      font-weight: 800;
+      white-space: nowrap;
+      border: 1px solid #b45309;
+    }
+
+    .footer {
+      padding-top: 8px;
+      border-top: 1px solid #e7e5e4;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      font-size: 10px;
+      color: #a8a29e;
+    }
+  </style>
+</head>
+<body>
+
+  <div class="page">
+    <div class="page-content">
+      <header class="header">
+        <div class="header-brand">
+          <img src="PonyCafe_LOGO.jpg" alt="Logo PonyCafe" class="logo-img">
+          <div class="brand-text">
+            <h1>PonyCafe POS</h1>
+            <p>Sistema Inteligente de Punto de Venta Universitario</p>
+          </div>
+        </div>
+        <div class="header-meta">
+          <span class="phase-badge">Fase Beta Funcional</span>
+          <div class="meta-date">Reporte Ejecutivo de Estatus - Noviembre 2026</div>
+        </div>
+      </header>
+
+      <section>
+        <h2 class="section-title">1. ¿En qué fase estamos? (Estatus Actual)</h2>
+        <div class="phase-box">
+          <h3>Fase 2: Prototipo Operativo Completo (Fase Beta)</h3>
+          <p>
+            El sistema ha completado con éxito la transición de un diseño visual preliminar a una <strong>aplicación totalmente operativa</strong>. Actualmente permite atender ventas reales: calcula totales automáticamente, aplica descuentos universitarios, procesa múltiples formas de pago y resguarda cada orden permanentemente en su base de datos.
+          </p>
+        </div>
+
+        <div class="phase-steps">
+          <div class="step-card">
+            <div class="step-header">
+              <span class="step-number">Etapa 1</span>
+              <span class="step-status status-done">Completada</span>
+            </div>
+            <div class="step-title">Diseño Visual Inicial</div>
+            <div class="step-desc">Maquetación visual básica de las pantallas de catálogo y carrito de compras.</div>
+          </div>
+
+          <div class="step-card active">
+            <div class="step-header">
+              <span class="step-number">Etapa 2</span>
+              <span class="step-status status-current">Activa (Actual)</span>
+            </div>
+            <div class="step-title">Integración y Base de Datos</div>
+            <div class="step-desc">Conexión con PostgreSQL, lógica de cobro interactiva y métricas en vivo.</div>
+          </div>
+
+          <div class="step-card">
+            <div class="step-header">
+              <span class="step-number">Etapa 3</span>
+              <span class="step-status status-pending">Siguiente Paso</span>
+            </div>
+            <div class="step-title">Piloto en Campus</div>
+            <div class="step-desc">Pruebas en mostrador real con baristas, ticketera física e inventarios.</div>
+          </div>
+        </div>
+      </section>
+
+      <section>
+        <h2 class="section-title">2. ¿Qué funciones tiene el sistema?</h2>
+        <div class="features-grid">
+
+          <div class="feature-card">
+            <div class="feature-icon">☕</div>
+            <div class="feature-text">
+              <h4>Catálogo Dinámico e Inteligente</h4>
+              <p>Muestra el menú organizado por categorías (Café, Panadería, Bebidas, Snacks) con buscador instantáneo por nombre o descripción.</p>
+            </div>
+          </div>
+
+          <div class="feature-card">
+            <div class="feature-icon">🛒</div>
+            <div class="feature-text">
+              <h4>Carrito de Compras Reactivo</h4>
+              <p>Permite agregar productos en un clic, ajustar cantidades (+ / -), eliminar artículos y añadir notas de preparación para cocina.</p>
+            </div>
+          </div>
+
+          <div class="feature-card">
+            <div class="feature-icon">🎓</div>
+            <div class="feature-text">
+              <h4>Beca Alimenticia (1 por día)</h4>
+              <p>Módulo de validación diaria por matrícula para aplicar el beneficio alimenticio institucional (precios finales con IVA ya incluido).</p>
+            </div>
+          </div>
+
+          <div class="feature-card">
+            <div class="feature-icon">💳</div>
+            <div class="feature-text">
+              <h4>Múltiples Métodos de Pago</h4>
+              <p>Opciones de cobro en Efectivo, Tarjeta bancaria y PonyPay (saldo digital universitario), facilitando el flujo rápido en caja.</p>
+            </div>
+          </div>
+
+          <div class="feature-card">
+            <div class="feature-icon">🧾</div>
+            <div class="feature-text">
+              <h4>Ticket Digital Instantáneo</h4>
+              <p>Genera en pantalla un comprobante con folio único (Ej. ORD-8492), fecha, detalle de productos consumidos y total liquidado.</p>
+            </div>
+          </div>
+
+          <div class="feature-card">
+            <div class="feature-icon">📊</div>
+            <div class="feature-text">
+              <h4>Dashboard de Ventas en Vivo</h4>
+              <p>Panel con total de ingresos recaudados, órdenes completadas del día, estado del sistema y tabla de historial de tickets.</p>
+            </div>
+          </div>
+
+        </div>
+      </section>
+    </div>
+
+    <footer class="footer">
+      <div>PonyCafe - Sistema POS Campus Universitario</div>
+      <div>Página 1 de 2</div>
+    </footer>
+  </div>
+
+  <div class="page page-last">
+    <div class="page-content">
+      <div class="page2-header">
+        <span>PonyCafe POS - Informe de Estatus</span>
+        <span>Noviembre 2026 | Documento Ejecutivo</span>
+      </div>
+
+      <section>
+        <h2 class="section-title">3. ¿Qué se puede hacer hoy con PonyCafe POS?</h2>
+        <div class="usecases-container">
+          <ul class="usecases-list">
+            <li class="usecase-item">
+              <span class="check-bullet">✓</span>
+              <div><strong>Atención al cliente ultrarrápida:</strong> Tomar pedidos en segundos desde pantallas táctiles o computadoras de mostrador sin retrasar la fila.</div>
+            </li>
+            <li class="usecase-item">
+              <span class="check-bullet">✓</span>
+              <div><strong>Personalización exacta en barra:</strong> Registrar notas como "deslactosada", "sin azúcar" o "para llevar" para evitar errores en preparación.</div>
+            </li>
+            <li class="usecase-item">
+              <span class="check-bullet">✓</span>
+              <div><strong>Corte de caja sin esfuerzo:</strong> Conocer en cualquier momento cuánto dinero ha ingresado hoy sin necesidad de sumar tickets a mano.</div>
+            </li>
+            <li class="usecase-item">
+              <span class="check-bullet">✓</span>
+              <div><strong>Seguridad total de información:</strong> Cada venta se guarda de inmediato; si se apaga la computadora, los datos continúan respaldados.</div>
+            </li>
+          </ul>
+        </div>
+      </section>
+
+      <section>
+        <h2 class="section-title">4. ¿Qué cambios y mejoras se realizaron recientemente?</h2>
+        <table class="changes-table">
+          <thead>
+            <tr>
+              <th style="width: 28%;">Área</th>
+              <th style="width: 36%;">Antes</th>
+              <th style="width: 36%;">Ahora (Mejorado)</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td><strong>Persistencia de Ventas</strong></td>
+              <td><span class="tag-before">Sin memoria</span> Las órdenes se perdían al cerrar el navegador o reiniciar.</td>
+              <td><span class="tag-after">Base de Datos PostgreSQL</span> Almacenamiento formal e histórico de productos, órdenes y clientes.</td>
+            </tr>
+            <tr>
+              <td><strong>Pantalla de Inicio</strong></td>
+              <td><span class="tag-before">Página en blanco</span> No existía ningún contenido ni métricas en la portada.</td>
+              <td><span class="tag-after">Dashboard de Control</span> Panel con métricas en tiempo real, ventas acumuladas y accesos rápidos.</td>
+            </tr>
+            <tr>
+              <td><strong>Navegación del Menú</strong></td>
+              <td><span class="tag-before">Listado rígido</span> Sin filtros funcionales ni posibilidad de buscar artículos.</td>
+              <td><span class="tag-after">Buscador y Categorías</span> Filtros instantáneos por categoría y barra de búsqueda predictiva.</td>
+            </tr>
+            <tr>
+              <td><strong>Caja y Liquidación</strong></td>
+              <td><span class="tag-before">Simulación</span> Botones decorativos sin procesamiento ni folios.</td>
+              <td><span class="tag-after">Cobro Completo</span> Elección de pago, beca alimenticia diaria (1 uso/día) y ticket digital sin recargos de IVA.</td>
+            </tr>
+            <tr>
+              <td><strong>Identidad Visual</strong></td>
+              <td><span class="tag-before">Básica</span> Estilos visuales genéricos y poco adaptados a pantallas.</td>
+              <td><span class="tag-after">Paleta PonyCafe</span> Diseño cálido (ámbar y café), avisos toast y vista responsiva.</td>
+            </tr>
+          </tbody>
+        </table>
+      </section>
+
+      <section>
+        <h2 class="section-title">5. Conclusión y Próximos Pasos</h2>
+        <div class="summary-card">
+          <div class="summary-text">
+            <h4>Conclusión Ejecutiva del Proyecto</h4>
+            <p>PonyCafe POS se encuentra en un estado funcional sólido, moderno y confiable. El sistema está 100% listo para implementarse en pruebas piloto en cafetería o mostrador.</p>
+          </div>
+          <div class="summary-badge">Listo para Pruebas Piloto</div>
+        </div>
+
+        <div class="phase-steps" style="margin-top: 10px;">
+          <div class="step-card">
+            <div class="step-title">1. Pruebas de Campo</div>
+            <div class="step-desc">Validar el uso diario con cajeros y baristas en horas pico de receso.</div>
+          </div>
+          <div class="step-card">
+            <div class="step-title">2. Impresión Física</div>
+            <div class="step-desc">Conexión con impresora térmica de 58mm/80mm para tickets en papel.</div>
+          </div>
+          <div class="step-card">
+            <div class="step-title">3. Control de Stock</div>
+            <div class="step-desc">Descuento automático de inventario por cada café o postre vendido.</div>
+          </div>
+        </div>
+      </section>
+    </div>
+
+    <footer class="footer">
+      <div>PonyCafe - Sistema POS Campus Universitario</div>
+      <div>Página 2 de 2</div>
+    </footer>
+  </div>
+
+</body>
+</html>

@@ -18,14 +18,20 @@ CREATE TABLE IF NOT EXISTS productos (
 CREATE TABLE IF NOT EXISTS ordenes (
     id SERIAL PRIMARY KEY,
     numero_orden VARCHAR(20) NOT NULL UNIQUE,
+    folio VARCHAR(20) UNIQUE,
+    cliente_nombre VARCHAR(120),
+    cliente_matricula VARCHAR(50),
     cliente_tipo VARCHAR(50) DEFAULT 'Estudiante',
     metodo_pago VARCHAR(50) NOT NULL,
+    tipo_entrega VARCHAR(20) DEFAULT 'INMEDIATA',
+    hora_entrega TIME DEFAULT NULL,
+    fecha_entrega DATE DEFAULT CURRENT_DATE,
     notas TEXT,
     subtotal NUMERIC(10, 2) NOT NULL CHECK (subtotal >= 0),
     descuento NUMERIC(10, 2) DEFAULT 0 CHECK (descuento >= 0),
     impuestos NUMERIC(10, 2) NOT NULL CHECK (impuestos >= 0),
     total NUMERIC(10, 2) NOT NULL CHECK (total >= 0),
-    estado VARCHAR(30) DEFAULT 'Completada',
+    estado VARCHAR(30) DEFAULT 'Pendiente',
     creado_en TIMESTAMP DEFAULT CURRENT_TIMESTAMP
 );
 
@@ -37,7 +43,18 @@ CREATE TABLE IF NOT EXISTS detalle_orden (
     cantidad INTEGER NOT NULL CHECK (cantidad > 0),
     precio_unitario NUMERIC(10, 2) NOT NULL CHECK (precio_unitario >= 0),
     subtotal NUMERIC(10, 2) NOT NULL CHECK (subtotal >= 0),
-    notas TEXT
+    notas TEXT,
+    modificadores JSONB DEFAULT '[]'::jsonb
+);
+
+CREATE TABLE IF NOT EXISTS cuentas_ponypay (
+    id SERIAL PRIMARY KEY,
+    matricula VARCHAR(50) UNIQUE NOT NULL,
+    nombre_estudiante VARCHAR(120) NOT NULL,
+    saldo NUMERIC(10, 2) NOT NULL DEFAULT 0.00,
+    tiene_beca BOOLEAN NOT NULL DEFAULT FALSE,
+    ultima_beca_fecha DATE DEFAULT NULL,
+    creado_en TIMESTAMP DEFAULT CURRENT_TIMESTAMP
 );
 
 INSERT INTO categorias (nombre, codigo, badge_class) VALUES
@@ -62,3 +79,8 @@ INSERT INTO productos (categoria_id, nombre, descripcion, precio, disponible) VA
 (4, 'Galleta con Chispas', 'Galleta suave horneada con chispas de chocolate semiamargo.', 25.00, true)
 ON CONFLICT DO NOTHING;
 
+INSERT INTO cuentas_ponypay (matricula, nombre_estudiante, saldo, tiene_beca) VALUES
+('2024TEST', 'Juan Pablo Pérez', 250.00, true),
+('2024BECA', 'Ana Sofía Rodríguez', 180.00, true),
+('2024PONY', 'Carlos Mendoza', 300.00, false)
+ON CONFLICT (matricula) DO NOTHING;
